@@ -20,13 +20,13 @@ First set mode, then go further down in this file to set other options needed fo
 
 */
 // --- setting mode -------------------------------------------------------------------------------------------------------------------------
-// #define useAutomaticTemperatureControl
+#define useAutomaticTemperatureControl
   #ifdef useAutomaticTemperatureControl
     // --- choose how to set target temperature. Activate only one. --------------------------------------
-    #define setActualTemperatureViaBME280
-   //  #define setActualTemperatureViaMQTT
+    //#define setActualTemperatureViaBME280
+  #define setActualTemperatureViaMQTT
   #endif
-// #define useTemperatureSensorBME280
+#define useTemperatureSensorBME280
 #define useWIFI
 #define useMQTT
 // #define useTFT
@@ -61,7 +61,7 @@ const int numberOfInterrupsInOneSingleRotation = 2;    // Number of interrupts E
 
 #ifdef useAutomaticTemperatureControl
 // initial target temperature on startup
-const float initialTargetTemperature = 27.0;
+const float initialTargetTemperature = 35.0;
 // Lowest pwm value the temperature controller should use to set fan speed. If you want the fan not to turn off, set a value so that fan always runs.
 const int pwmMinimumValue            = 120;
 #else
@@ -87,8 +87,8 @@ static_assert(false, "You cannot have both \"#define setActualTemperatureViaBME2
 
 #ifdef useTemperatureSensorBME280
 // I2C pins used for BME280
-const int I2C_SCL              = GPIO_NUM_32; // GPIO_NUM_22; // GPIO_NUM_17
-const int I2C_SDA              = GPIO_NUM_33; // GPIO_NUM_21; // GPIO_NUM_16
+const int I2C_SCL              =  GPIO_NUM_22; //GPIO_NUM_32; // GPIO_NUM_17
+const int I2C_SDA              =  GPIO_NUM_21; //GPIO_NUM_33; // GPIO_NUM_16
 const int I2C_FREQ             = 100000; // 400000
 const uint8_t BME280_addr      = 0x76;
 // in order to calibrate BME280 at startup, provide here the height over sea level in meter at your location
