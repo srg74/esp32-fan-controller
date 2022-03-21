@@ -18,8 +18,8 @@ void initTacho(void) {
   pinMode(tachoPin, INPUT);
   digitalWrite(tachoPin, HIGH);
   attachInterrupt(digitalPinToInterrupt(tachoPin), rpm_fan, FALLING);
-  log_printf(MY_LOG_FORMAT("  Fan tacho detection sucessfully initialized."));
-}
+  Log.printf("  Fan tacho detection sucessfully initialized.\r\n");
+ }
 
 void updateTacho(void) {
   // start of tacho measurement
@@ -28,7 +28,7 @@ void updateTacho(void) {
     // detach interrupt while calculating rpm
     detachInterrupt(digitalPinToInterrupt(tachoPin)); 
     // calculate rpm
-    last_rpm = counter_rpm * (60 / numberOfInterrupsInOneSingleRotation);
+    last_rpm = counter_rpm * ((float)60 / (float)numberOfInterrupsInOneSingleRotation) * ((float)1000 / (float)tachoUpdateCycle);
     // log_printf(MY_LOG_FORMAT("fan rpm = %d"), last_rpm);
 
     // reset counter
